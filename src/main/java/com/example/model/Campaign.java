@@ -1,6 +1,10 @@
 package com.example.model;
 
 import jakarta.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,15 +14,21 @@ import java.util.List;
 public class Campaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "Id is required")
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotNull(message = "Start date is required")
     private LocalDate startDate;
+    @NotNull(message = "Bid is required")
     private BigDecimal bid;
 
+    @NotNull(message = "Product list is required")
+    @Valid
     @ManyToMany
     private List<Product> products;
 
-    // constructors, getters, and setters omitted for brevity
+    // constructors, getters, and setters
 
     public Long getId() {
         return id;
@@ -59,6 +69,8 @@ public class Campaign {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
+    public Campaign() {}
 
     public Campaign(String name, LocalDate startDate, BigDecimal bid, List<Product> products) {
         this.id = id;

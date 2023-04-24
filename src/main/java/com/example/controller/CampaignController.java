@@ -32,20 +32,20 @@ public class CampaignController {
         return campaignRepository.save(campaign);
     }
 
-    @GetMapping("/ads")
-    public Product serveAd(@RequestParam String category) {
-        LocalDate now = LocalDate.now();
-        List<Campaign> activeCampaigns = campaignRepository.findByStartDateAfterAndStartDateBefore(now.minusDays(1), now.plusDays(10));
-        if (activeCampaigns.isEmpty()) {
-            return productRepository.findFirstByCategoryOrderByPriceDesc(category);
-        } else {
-            List<Product> promotedProducts = activeCampaigns.stream().flatMap(campaign -> campaign.getProducts().stream()).collect(Collectors.toList());
-            List<Product> categoryProducts = promotedProducts.stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toList());
-            if (categoryProducts.isEmpty()) {
-                return productRepository.findFirstByCategoryOrderByPriceDesc(category);
-            } else {
-                return Collections.max(categoryProducts, Comparator.comparing(Product::getPrice));
-            }
-        }
-    }
+//    @GetMapping("/ads")
+//    public Product serveAd(@RequestParam String category) {
+//        LocalDate now = LocalDate.now();
+//        List<Campaign> activeCampaigns = campaignRepository.findByStartDateAfterAndStartDateBefore(now.minusDays(1), now.plusDays(10));
+//        if (activeCampaigns.isEmpty()) {
+//            return productRepository.findFirstByCategoryOrderByPriceDesc(category);
+//        } else {
+//            List<Product> promotedProducts = activeCampaigns.stream().flatMap(campaign -> campaign.getProducts().stream()).collect(Collectors.toList());
+//            List<Product> categoryProducts = promotedProducts.stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toList());
+//            if (categoryProducts.isEmpty()) {
+//                return productRepository.findFirstByCategoryOrderByPriceDesc(category);
+//            } else {
+//                return Collections.max(categoryProducts, Comparator.comparing(Product::getPrice));
+//            }
+//        }
+//    }
 }
