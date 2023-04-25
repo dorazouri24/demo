@@ -1,6 +1,6 @@
 # demo
 The project is a backend application for an online auction website. It is built using Java and the Spring Boot framework,
-and uses a MySQL or Microsoft SQL Server database to store data.
+and uses Microsoft SQL Server database to store data.
 
 The application provides several REST APIs for creating, updating, and retrieving products and campaigns.
 Products represent items that are up for auction, while campaigns represent time-limited sales events that include a group of related products.
