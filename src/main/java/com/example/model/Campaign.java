@@ -1,9 +1,6 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 
 import java.math.BigDecimal;
@@ -14,17 +11,11 @@ import java.util.List;
 public class Campaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Id is required")
     private Long id;
-    @NotBlank(message = "Name is required")
     private String name;
-    @NotNull(message = "Start date is required")
     private LocalDate startDate;
-    @NotNull(message = "Bid is required")
     private BigDecimal bid;
 
-    @NotNull(message = "Product list is required")
-    @Valid
     @ManyToMany
     private List<Product> products;
 
